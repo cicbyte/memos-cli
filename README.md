@@ -1,6 +1,12 @@
 # memos-cli
 
-Memos 个人笔记应用的命令行工具，支持交互式 TUI 和子命令两种使用方式。
+[Memos](https://github.com/usememos/memos) 的命令行工具。将远程备忘录同步到本地 SQLite，通过 CLI 或 AI Skill 让 AI 以最少 token、最稳定的方式检索你的笔记。
+
+**为什么需要它？**
+
+- **Memos 是轻量备忘录的事实标准，CLI 补齐它不覆盖的场景** — 终端操作、AI 集成、自动化脚本
+- **AI 时代 CLI 比 MCP 更实用** — MCP 每次调用传输工具定义，token 开销大；Skill 教 AI 直接执行 `memo list --from=2026-03-01`，输出精简可控，节省 token
+- **本地缓存 = 可靠性** — 同步一次后稳定可用，不受网络超时、API 限流影响
 
 ## 功能特性
 
