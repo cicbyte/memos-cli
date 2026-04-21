@@ -69,6 +69,8 @@ memos-cli memo list [flags]
 | `--tag` | `-t` | — | 按标签过滤 |
 | `--page` | `-p` | — | 页码，支持 `2`、`1,3,5`（多页）、`all`（全部） |
 | `--search` | `-s` | — | 文本搜索（模糊匹配内容） |
+| `--from` | — | — | 起始日期（YYYY-MM-DD） |
+| `--to` | — | — | 结束日期（YYYY-MM-DD，包含当天） |
 | `--archived` | — | false | 显示已归档的备忘录 |
 
 ### 示例
@@ -88,6 +90,10 @@ memos-cli memo list --tag=work
 
 # 文本搜索
 memos-cli memo list --search="会议记录"
+
+# 按时间范围查询
+memos-cli memo list --from=2026-01-01
+memos-cli memo list --from=2025-07-01 --to=2025-12-31
 
 # 获取全部备忘录
 memos-cli memo list --page=all

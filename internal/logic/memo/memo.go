@@ -23,6 +23,8 @@ type ListConfig struct {
 	Archived   bool
 	Page       string
 	Search     string
+	From       string
+	To         string
 }
 
 type ListResult struct {
@@ -63,6 +65,20 @@ func (p *ListProcessor) Execute() (*ListResult, error) {
 	}
 	if p.config.Search != "" {
 		query = query.Where("content LIKE ?", fmt.Sprintf("%%%s%%", p.config.Search))
+	}
+	if p.config.From != "" {
+		t, err := time.Parse("2006-01-02", p.config.From)
+		if err != nil {
+			return nil, fmt.Errorf("--from 格式错误，应为 YYYY-MM-DD: %w", err)
+		}
+		query = query.Where("created_time >= ?", t.Unix())
+	}
+	if p.config.To != "" {
+		t, err := time.Parse("2006-01-02", p.config.To)
+		if err != nil {
+			return nil, fmt.Errorf("--to 格式错误，应为 YYYY-MM-DD: %w", err)
+		}
+		query = query.Where("created_time < ?", t.Add(24*time.Hour).Unix())
 	}
 
 	var filteredCount int64

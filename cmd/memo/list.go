@@ -20,6 +20,8 @@ var (
 	memoListArchived   bool
 	memoListPage       string
 	memoListSearch     string
+	memoListFrom       string
+	memoListTo         string
 )
 
 var (
@@ -64,6 +66,8 @@ func getListCommand() *cobra.Command {
 	cmd.Flags().BoolVar(&memoListArchived, "archived", false, "显示已归档备忘录")
 	cmd.Flags().StringVarP(&memoListPage, "page", "p", "", "页码 (如: 2, 或 '1,2,3', 或 'all' 获取全部)")
 	cmd.Flags().StringVarP(&memoListSearch, "search", "s", "", "文本搜索（模糊匹配内容）")
+	cmd.Flags().StringVar(&memoListFrom, "from", "", "起始日期 (YYYY-MM-DD)")
+	cmd.Flags().StringVar(&memoListTo, "to", "", "结束日期 (YYYY-MM-DD，包含当天)")
 
 	return cmd
 }
@@ -76,6 +80,8 @@ func runList(cmd *cobra.Command, args []string) {
 		Archived:   memoListArchived,
 		Page:       memoListPage,
 		Search:     memoListSearch,
+		From:       memoListFrom,
+		To:         memoListTo,
 	}
 
 	processor := memologic.NewListProcessor(cfg, common.GetAppConfig())
